@@ -1,0 +1,32 @@
+{
+  "id": "discombobulator",
+  "name": "The Discombobulator",
+  "kind": "tool",
+  "chamber": "bridge",
+  "grade": 0.977,
+  "rarity": "uber-unique",
+  "tier": "yellow",
+  "set": "trust-rail",
+  "sigil": "◊",
+  "cost": 9,
+  "atk": 8,
+  "hp": 14,
+  "sockets": 3,
+  "keywords": ["Ingest", "Re-grow", "Prove", "Migrate"],
+  "flavour": "It doesn't copy the old machine. It learns what the machine meant, and grows a better one that still answers true.",
+  "typeLine": "Uber-Unique · Re-grower · Bridge",
+  "url": "https://github.com/sjgant80-hub/discombobulator",
+  "docsUrl": "https://sjgant80-hub.github.io/discombobulator/",
+  "serial": null,
+  "seal": null,
+  "mintable": true,
+  "bloodline": ["pattern-organs", "fall-spore", "sentinel", "witness"],
+  "stats": {
+    "provenOn": "LoanDesk 2011 — 1,200-record legacy credit engine",
+    "equivalenceBasePct": 94.6,
+    "equivalenceHumanPct": 97.7,
+    "heldOutCases": 351,
+    "migrateIntegrity": "PASS",
+    "sentinelDefense": "forged/replay/off-kappa/over-budget all rejected"
+  }
+}

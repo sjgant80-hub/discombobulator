@@ -1,0 +1,13 @@
+{
+  "name": "discombobulator",
+  "version": "1.0.0",
+  "description": "Legacy software → FallWorld-native sovereign RE-GROWTH. Ingest a system, understand what it DOES, re-grow it sovereign, PROVE equivalence on real cases, migrate the data.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "pipeline": "node run.mjs",
+    "seal": "node seal.mjs",
+    "gate": "node witness.mjs mutate kernel/understand.mjs && node witness.mjs mutate kernel/regrow.mjs && node witness.mjs mutate kernel/verify.mjs && node witness.mjs mutate kernel/migrate.mjs && node witness.mjs mutate kernel/features.mjs && node witness.mjs mutate kernel/confirm.mjs"
+  },
+  "license": "MIT"
+}

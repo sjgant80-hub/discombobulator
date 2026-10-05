@@ -1,0 +1,42 @@
+# The Discombobulator
+
+> Legacy software → FallWorld-native sovereign RE-GROWTH. A guided pipeline that ingests a
+> client's legacy system, understands what it DOES (not how it's coded), re-grows a sovereign
+> build that does the same job, PROVES equivalence on the system's own held-out cases, and
+> migrates the data across. Functionally equivalent, structurally superior, owned by them.
+
+## What it is
+Not a copier (a byte-identical copy reproduces the old flaws — soft, un-sovereign, black-box).
+A RE-GROWER: extract the function as verified patterns, grow a new FallWorld-native organ that
+reproduces it, prove equivalence on real cases, migrate the data.
+
+## The five gated stages
+1. INGEST — inventory the code, config, schema and data; sample the legacy as a black-box oracle.
+2. UNDERSTAND — induce the decision function as patterns (two grown organs: a status organ and a
+   tier organ); each leaf is proved on a held-out VALIDATE slice, low-confidence leaves flagged as
+   candidate MISunderstandings. The hard, valuable part.
+3. RE-GROW — grow a sovereign build from the spec: SENTINEL-defended (signed, κ-witnessed packets),
+   Konomi-compressed pattern book, proof-chain transparent, grow-not-install.
+4. VERIFY-EQUIVALENT — run the legacy's REAL held-out cases through BOTH old and new; assert same
+   output; surface EVERY mismatch and attribute it to a candidate tribal rule. The gate is the safety.
+5. MIGRATE — schema-transform the records; count / null / checksum / roundtrip integrity checks.
+
+## Proven on
+A synthetic but faithful legacy system, "LoanDesk 2011": an undocumented 1,200-record credit-decision
+engine with ~80% clean threshold rules and ~20% gnarly, undocumented tribal rules (a regional
+grandfather clause, a product guardrail, a date-bound promo).
+
+## Honest v1
+A guided pipeline, not a one-click vending machine. The common rules extract automatically; the
+gnarly ones are flagged for a human to confirm in a moment. Some things don't translate at all and
+would be bridged, not re-grown — flagged up front. The un-forgeable proof is the CI re-run on the
+runner, re-derived from the sealed inputs.
+
+## Credits
+Built on the Konomi architecture and LIGHT, created by Thomas Frumkin (the primorial-fold codec in
+SENTINEL). Organs reuse pattern-organs (the Pattern Organ and held-out prove-gate) and fall-spore
+(grow-from-seed), both sjgant80-hub. Equivalence enforced by the witness mutation gate.
+
+## Links
+- Live: https://sjgant80-hub.github.io/discombobulator/
+- Repo: https://github.com/sjgant80-hub/discombobulator

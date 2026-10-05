@@ -1,0 +1,24 @@
+[
+  {
+    "id": "G1-NE-grandfather",
+    "desc": "Human-confirmed after the gate flagged 5 NE cases as REFER->APPROVE: the acquired-bank grandfather (NE region, 5+ years tenure) auto-approves a would-be REFER.",
+    "when": [ { "f": "region", "op": "==", "v": "NE" }, { "f": "employmentYears", "op": ">=", "v": 5 } ],
+    "ifStatus": "REFER",
+    "set": { "status": "APPROVE" }
+  },
+  {
+    "id": "G2-BRIDGE-guardrail",
+    "desc": "Human-confirmed after the gate flagged BRIDGE cases: large bridging loans (BRIDGE product, loan > 4x income i.e. lti > 4) are forced to a human even with perfect credit.",
+    "when": [ { "f": "product", "op": "==", "v": "BRIDGE" }, { "f": "lti", "op": ">", "v": 4 } ],
+    "ifStatus": "APPROVE",
+    "set": { "status": "REFER" }
+  },
+  {
+    "id": "G3-Mar2019-promo",
+    "desc": "Human-confirmed after the gate flagged March-2019 cases: the spring promo bumped approved applicants one pricing tier for that month only.",
+    "when": [ { "f": "applyMonth", "op": "==", "v": "2019-03" } ],
+    "ifStatus": "APPROVE",
+    "ifTierIn": [ "B", "C" ],
+    "set": { "tierShift": "up" }
+  }
+]

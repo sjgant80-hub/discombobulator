@@ -1,0 +1,15 @@
+{
+  "minAge": 18,
+  "minIncome": 12000,
+  "hardDeclineScore": 560,
+  "maxPriorDefaults": 2,
+  "dtiDecline": 0.55,
+  "ltiDecline": 6.0,
+  "dtiApprove": 0.40,
+  "ltiApprove": 4.5,
+  "minEmploymentForApprove": 2,
+  "band": { "A": 760, "B": 700, "C": 640 },
+  "neGrandfatherYears": 5,
+  "bridgeLtiGuardrail": 4.0,
+  "promoMonth": "2019-03"
+}

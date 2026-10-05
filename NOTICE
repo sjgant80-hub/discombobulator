@@ -1,0 +1,24 @@
+The Discombobulator — credits and provenance
+=============================================
+
+Konomi architecture & LIGHT — created by THOMAS FRUMKIN.
+  The SENTINEL defense layer uses Thomas Frumkin's primorial-fold codec (the κ-witness:
+  a prime-spine fold of the command payload). SENTINEL is vendored from the `sentinel`
+  organ (sjgant80-hub) and credited in kernel/sentinel.mjs. Used with the Konomi lineage.
+
+pattern-organs (sjgant80-hub) — the Pattern Organ and its held-out prove-gate.
+  The UNDERSTAND stage reuses pattern-organs' doctrine (the `prove`, `carry` and `own`
+  stem elements). pattern-organs is itself built on the Konomi architecture.
+
+fall-spore (sjgant80-hub) — grow-not-install / grow-from-seed.
+  The RE-GROW stage follows fall-spore's doctrine: transmit the seed, grow the build locally.
+
+witness (sjgant80-hub) — the deterministic mutation + fuzz gate (MIT).
+  Vendored as witness.mjs / runner.mjs; enforces that the kernels contain no test-theatre.
+
+"LoanDesk 2011" is a SYNTHETIC legacy system constructed as a faithful proof target. It is
+not a real product and contains no real personal data; all records are generated
+deterministically by legacy/gen-records.mjs.
+
+No pricing is published here. This repository is a demonstration of the trust rail
+(re-growth proven by an equivalence gate), not a commercial offer.

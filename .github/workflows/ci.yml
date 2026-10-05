@@ -1,0 +1,31 @@
+name: discombobulator-ci
+on:
+  push: { branches: ['**'] }
+  pull_request:
+  workflow_dispatch:
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Tests (behaviour + totality + invariants)
+        run: node --test
+      - name: Witness mutation gate (every kernel must be CLEAN)
+        run: |
+          set -e
+          for k in features understand regrow verify migrate ingest confirm; do
+            echo "=== witness: kernel/$k.mjs ==="
+            node witness.mjs mutate kernel/$k.mjs --test node --test
+          done
+      - name: Seal — re-derive the measurement from the sealed inputs
+        run: |
+          if [ -f measure.json ]; then
+            node seal.mjs --verify
+          elif [ -f prereg.json ]; then
+            echo "prereg present, measure not yet landed — checking prereg is well-formed"
+            node -e "const p=require('./prereg.json'); if(p.kind!=='prereg'||!p.inputs||!p.predictions) process.exit(1); console.log('prereg OK with '+Object.keys(p.inputs).length+' hashed inputs')"
+          else
+            echo "no seal yet"
+          fi

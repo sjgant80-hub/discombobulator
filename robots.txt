@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# AI crawlers welcome — this is a public demonstration.
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://sjgant80-hub.github.io/discombobulator/sitemap.xml

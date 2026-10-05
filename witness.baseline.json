@@ -1,0 +1,37 @@
+[
+  {
+    "mutation": "<= → <",
+    "snippet": "if (mids.length <= cap) return mids;",
+    "reason": "Reviewed-equivalent: when mids.length === cap the subsample branch computes mids[floor(i*cap/cap)] = mids[i] for i=0..cap-1, i.e. every element in order — identical to returning mids unchanged; for mids.length < cap both <= and < are true. No input distinguishes them."
+  },
+  {
+    "mutation": "<= → <",
+    "snippet": "for (const r of rows) (r.x[f] <= t ? L : R).push(r);",
+    "reason": "Reviewed-equivalent during fit: thresholds are midpoints (v[i-1]+v[i])/2 strictly between two consecutive DISTINCT observed values, so no training value ever equals t and <= vs < partition the rows identically. The boundary that CAN matter — routeLeaf on an unseen input exactly at the threshold — is a separate line and is tested (predict at the exact threshold goes left)."
+  },
+  {
+    "mutation": "<= → <",
+    "snippet": "const pure = Object.keys(counts).length <= 1;",
+    "reason": "Reviewed-equivalent: with < a single-label node is treated as impure, so build calls bestSplit, which finds zero gain on an already-pure node and returns null, and the node becomes a leaf anyway — the resulting tree is identical. (length is 0 only for an empty node, which build never reaches.)"
+  },
+  {
+    "mutation": "> → >=",
+    "snippet": "if (gain > GINI_MIN_GAIN && (!best || gain > best.gain)) best = { kind: 'num', feature: f,",
+    "reason": "Reviewed-equivalent: gain is a difference of two floating-point Gini impurities. It is never exactly GINI_MIN_GAIN (1e-9), and no two distinct candidate splits produce bit-identical gain on this dataset — verified by the deterministic build producing the same tree every run — so > and >= admit and select the same split."
+  },
+  {
+    "mutation": "> → >=",
+    "snippet": "if (gain > GINI_MIN_GAIN && (!best || gain > best.gain)) best = { kind: 'cat', feature: f,",
+    "reason": "Reviewed-equivalent (categorical twin of the numeric line): gain never equals the 1e-9 floor and distinct categorical splits do not tie to full float precision on this dataset, so > and >= select the identical split; the deterministic tree is unchanged."
+  },
+  {
+    "mutation": "> → >=",
+    "snippet": "const purity = m.total > 0 ? m.hitLabel / m.total : 0;",
+    "reason": "Reviewed-equivalent: a leaf only appears in perLeaf after at least one validate entry routes to it, so m.total is always >= 1; total > 0 and total >= 0 are both always true here and the division is never by zero either way."
+  },
+  {
+    "mutation": "< → <=",
+    "snippet": "while (node && !node.leaf && guard++ < 10000) {",
+    "reason": "Reviewed-equivalent: the 10000 bound is a defensive cap against a malformed cyclic tree. A tree built by this module is finite and far shallower than 10000, so the loop always exits via the leaf condition long before the guard; < vs <= on the cap is unreachable on any tree this code produces."
+  }
+]

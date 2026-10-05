@@ -1,0 +1,36 @@
+{
+  "kind": "prereg",
+  "note": "predictions + input hashes, committed BEFORE the measurement",
+  "predictions": {
+    "equivalence_base_pct": {
+      "min": 85,
+      "max": 98,
+      "note": "behaviour-induction reproduces the common rules; continuous-ratio boundary noise + rare tribal rules remain"
+    },
+    "equivalence_after_human_ge_base": true,
+    "auto_carry_not_worse_than_base": true,
+    "every_mismatch_flagged": true,
+    "migrate_integrity_pass": true,
+    "sentinel_defense_pass": true,
+    "tribal_rules_cleared_after_human": true
+  },
+  "inputs": {
+    "legacy/engine.cjs": "19a8b00550ad6f54720b9ebe3ba8057a222e5b40c79d047931e44a24fc52fd91",
+    "legacy/engine.browser.mjs": "1385ecbb40e06e8732e9708813e20b4dd98f4544e27a2da462fb3e45c293db0e",
+    "legacy/config.json": "5ba0583e809c5f554a917e7d8b4397b3f324a45f69ee964ba51ebd53d7b6ef39",
+    "legacy/records.json": "835a44498fa2b377492b745ca4368ad2a646378ba2755e4210bd40b3198137ac",
+    "legacy/store.cjs": "e35a391356d2ea36042d424d7ded1fe320fa49f4b1a1af27082e6e8ad6bf0d38",
+    "legacy/schema.sql": "8f373888eed9c2b48f04939df340b1507baeb49f16e43cedc3313c5432b3a9cc",
+    "confirmed-rules.json": "7af1f259672149deecc4f30d87d54778de00759242c35675d3c7a36dae92e7e8",
+    "kernel/features.mjs": "cf1ee80da57d304c46e2c1a5fbf03ba84274710a0e4526f36677d239b1acbaab",
+    "kernel/understand.mjs": "5ba16678aa0bb1749b1180d593c57e8a29deb44de9af85834b91c58328733bbb",
+    "kernel/regrow.mjs": "cfe3be1f3d28099b773f3d5e5b9d83d2301cc0bd3d433303ae1c9d4a26e5eac4",
+    "kernel/verify.mjs": "bf0600c507d67def0df4fde508e1a331961343f788df653c8778b98da298c52f",
+    "kernel/migrate.mjs": "c7f5cf0dd7d94657b6bc038e09105562af58ea6ac3b63ac9b1f1eab8f8336e6f",
+    "kernel/ingest.mjs": "7d168b3fdc21c44aaeb417c4e1f0d5e342dee9f9587a6555e1eba8d824d4f6dd",
+    "kernel/confirm.mjs": "9fbd8c9fa51e7c9f2dd863f5fdd1f0cf7bce856dd2004240eafa8c08508c22e2",
+    "kernel/sentinel.mjs": "81f05c11fa98c72e7119f3b8166d2cf4ff10cdeccaa1ae0d711367d778944440",
+    "kernel/defense.mjs": "99b8f41b87c81efca22b3c992b6c8268ffccc8fc7182a0ea0ed633776a640ea4",
+    "kernel/pipeline.mjs": "08f162cc2204024e93767940e6377624176ea3eab1948233139eba521ecc5a91"
+  }
+}
