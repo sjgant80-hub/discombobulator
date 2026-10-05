@@ -1,0 +1,106 @@
+{
+  "kind": "measure",
+  "derivedFrom": {
+    "legacy/engine.cjs": "19a8b00550ad6f54720b9ebe3ba8057a222e5b40c79d047931e44a24fc52fd91",
+    "legacy/engine.browser.mjs": "1385ecbb40e06e8732e9708813e20b4dd98f4544e27a2da462fb3e45c293db0e",
+    "legacy/config.json": "5ba0583e809c5f554a917e7d8b4397b3f324a45f69ee964ba51ebd53d7b6ef39",
+    "legacy/records.json": "835a44498fa2b377492b745ca4368ad2a646378ba2755e4210bd40b3198137ac",
+    "legacy/store.cjs": "e35a391356d2ea36042d424d7ded1fe320fa49f4b1a1af27082e6e8ad6bf0d38",
+    "legacy/schema.sql": "8f373888eed9c2b48f04939df340b1507baeb49f16e43cedc3313c5432b3a9cc",
+    "confirmed-rules.json": "7af1f259672149deecc4f30d87d54778de00759242c35675d3c7a36dae92e7e8",
+    "kernel/features.mjs": "cf1ee80da57d304c46e2c1a5fbf03ba84274710a0e4526f36677d239b1acbaab",
+    "kernel/understand.mjs": "5ba16678aa0bb1749b1180d593c57e8a29deb44de9af85834b91c58328733bbb",
+    "kernel/regrow.mjs": "cfe3be1f3d28099b773f3d5e5b9d83d2301cc0bd3d433303ae1c9d4a26e5eac4",
+    "kernel/verify.mjs": "bf0600c507d67def0df4fde508e1a331961343f788df653c8778b98da298c52f",
+    "kernel/migrate.mjs": "c7f5cf0dd7d94657b6bc038e09105562af58ea6ac3b63ac9b1f1eab8f8336e6f",
+    "kernel/ingest.mjs": "7d168b3fdc21c44aaeb417c4e1f0d5e342dee9f9587a6555e1eba8d824d4f6dd",
+    "kernel/confirm.mjs": "9fbd8c9fa51e7c9f2dd863f5fdd1f0cf7bce856dd2004240eafa8c08508c22e2",
+    "kernel/sentinel.mjs": "81f05c11fa98c72e7119f3b8166d2cf4ff10cdeccaa1ae0d711367d778944440",
+    "kernel/defense.mjs": "99b8f41b87c81efca22b3c992b6c8268ffccc8fc7182a0ea0ed633776a640ea4",
+    "kernel/pipeline.mjs": "08f162cc2204024e93767940e6377624176ea3eab1948233139eba521ecc5a91"
+  },
+  "results": {
+    "counts": {
+      "total": 1200,
+      "fit": 581,
+      "validate": 268,
+      "test": 351
+    },
+    "equivalence": {
+      "base": 94.587,
+      "auto": 96.011,
+      "human": 97.721,
+      "same": 343,
+      "total": 351
+    },
+    "flagged_invariant": true,
+    "base_attribution": {
+      "unattributed": 12,
+      "G3:Mar2019-promo": 6,
+      "G1:NE-grandfather": 1,
+      "G2:BRIDGE-guardrail": 1
+    },
+    "human_residual_attribution": {
+      "unattributed": 8
+    },
+    "tribal_cleared": true,
+    "migrate": {
+      "migrated": 1200,
+      "source": 1200,
+      "integrity": {
+        "countMatch": true,
+        "nullFreeRequired": true,
+        "checksumMatch": true,
+        "roundtripOk": true
+      },
+      "pass": true
+    },
+    "compression": {
+      "packed": "{\"f\":[\"dti\",\"creditScore\",\"lti\",\"priorDefaults\",\"employmentYears\",\"region\",\"income\",\"product\",\"loanAmount\"],\"l\":[\"DECLINE\",\"REFER\",\"APPROVE\",\"null\",\"D\",\"C\",\"B\",\"A\"],\"s\":\"N0:0.554,N1:559.5,L0,N2:4.518,N0:0.399,N3:1.5,N4:1.5,L1,N2:4.314,L2,L2,L0,N3:1.5,C5:NE,L2,N1:816,L1,L1,L0,N2:6.012,N3:1.5,N6:89050,C7:GREEN,L1,L1,L1,L0,L0,L0\",\"t\":\"N0:0.554,N1:758.5,N1:643.5,N1:559.5,L3,N3:1.5,N2:6.009,N1:636,L4,L4,L3,L3,N1:698.5,N2:6.144,N3:1.5,N8:425330,L5,L5,L3,L3,N3:1.5,N2:5.948,N1:707.5,L6,L6,L3,L3,N3:1.5,N2:5.994,N1:767.5,L7,N0:0.518,L7,L7,L3,L3,L3\"}",
+      "rawBytes": 5056,
+      "packedBytes": 545,
+      "ratio": 9.277
+    },
+    "organs": [
+      "creditScore",
+      "dti",
+      "employmentYears",
+      "income",
+      "loanAmount",
+      "lti",
+      "priorDefaults",
+      "product",
+      "region"
+    ],
+    "auto_rules": 2,
+    "confirmed_rules": [
+      "G1-NE-grandfather",
+      "G2-BRIDGE-guardrail",
+      "G3-Mar2019-promo"
+    ],
+    "defense": {
+      "legit": {
+        "ok": true,
+        "reason": "ok"
+      },
+      "forged": {
+        "rejected": true,
+        "reason": "forged"
+      },
+      "replay": {
+        "rejected": true,
+        "reason": "replay"
+      },
+      "overBudget": {
+        "rejected": true,
+        "reason": "budget-exceeded"
+      },
+      "offKappa": {
+        "rejected": true,
+        "reason": "off-kappa"
+      },
+      "pass": true
+    }
+  },
+  "predictionsMet": true
+}
