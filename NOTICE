@@ -1,6 +1,18 @@
 The Discombobulator — credits and provenance
 =============================================
 
+Guided Entropy Principle (GEP) — GARY W. FLOYD, Lumiea Systems Research Division,
+  ThunderStruck Service LLC (New Caney, Texas). Open Defensive Prior Art (Creative Commons).
+  Discombobulator's core thesis — that a byte-identical COPY of a legacy system stabilizes its
+  wrong/undocumented behavior, so a sovereign replacement must be PROVEN against the legacy's
+  own decisions on HELD-OUT cases rather than merely made to run — is Gary W. Floyd's
+  stable-wrong-state result ("a stable system can stabilize a wrong reference; stability ≠ truth")
+  from "From GEP Stabilization to Dual-Map Ethical Reasoning," v0.2 (2026), and the equivalence
+  gate's surface-every-mismatch discipline mirrors his parallel negative map (E⁻). The D·C·R
+  reading of a system's Drift/Context/Reinforcement is GEP's ("The Laws of Entropy-Time:
+  Rewriting Thermodynamics with the Guided Entropy Principle," Feb 2026). The idea + kernels +
+  gate are the estate's own; GEP is credited as the source principle they draw on.
+
 Konomi architecture & LIGHT — created by THOMAS FRUMKIN.
   The SENTINEL defense layer uses Thomas Frumkin's primorial-fold codec (the κ-witness:
   a prime-spine fold of the command payload). SENTINEL is vendored from the `sentinel`
