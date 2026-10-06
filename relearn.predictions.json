@@ -1,0 +1,28 @@
+{
+  "build": "discombobulator / bring-your-own-decision-log",
+  "what": "The generic product: upload ANY legacy decision log (a CSV of inputs + the system's decision), re-grow a sovereign replacement, PROVE equivalence on held-out rows the model never saw, surface every mismatch, and download a runnable owned replacement model + a signed migration receipt. Proven here on a frozen 1,200-row log the generic kernel was NOT hand-coded for.",
+  "sealed_before_measurement": true,
+  "claims": [
+    { "id": "P1", "text": "With ZERO hand-coding, the generic re-grower reproduces the legacy engine on held-out rows, well above its 3-class base rate", "check": "equivalenceRate >= 0.9" },
+    { "id": "P2", "text": "It parsed and typed the log itself: 1,200 rows, 12 features, the decision auto-picked, 3 decision classes", "check": "rows === 1200 && features === 12 && decisionName === 'decision' && decisionCount === 3" },
+    { "id": "P3", "text": "THE SAFETY GATE: every mismatch is surfaced, nothing hidden — the invariant same + mismatches === total holds", "check": "invariantHolds === true && mismatches > 0 && holdoutN === 351" },
+    { "id": "P4", "text": "THE PRODUCT: the downloaded owned replacement imports and predicts correctly on raw rows, its receipt verifies, and a tampered receipt is rejected", "check": "modelApprove === 'APPROVE' && modelDecline === 'DECLINE' && modelReceiptVerifies === true && receiptVerifies === true && tamperRejected === true" },
+    { "id": "P5", "text": "It flags its OWN uncertainty — low-confidence leaves are surfaced as candidate misunderstandings, not silently kept", "check": "flaggedLeaves >= 1" }
+  ],
+  "expected": {
+    "rows": 1200,
+    "features": 12,
+    "decisionName": "decision",
+    "decisionCount": 3,
+    "holdoutN": 351,
+    "equivalenceRate": 0.949,
+    "mismatches": 18,
+    "invariantHolds": true,
+    "flaggedLeaves": 9,
+    "receiptVerifies": true,
+    "tamperRejected": true,
+    "modelReceiptVerifies": true,
+    "modelApprove": "APPROVE",
+    "modelDecline": "DECLINE"
+  }
+}

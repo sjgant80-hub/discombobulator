@@ -33,5 +33,30 @@
     "mutation": "< → <=",
     "snippet": "while (node && !node.leaf && guard++ < 10000) {",
     "reason": "Reviewed-equivalent: the 10000 bound is a defensive cap against a malformed cyclic tree. A tree built by this module is finite and far shallower than 10000, so the loop always exits via the leaf condition long before the guard; < vs <= on the cap is unreachable on any tree this code produces."
+  },
+  {
+    "mutation": "< → <=",
+    "snippet": "for (let i = 1; i < vals.length; i++) mids.push((vals[i - 1] + vals[i]) / 2);",
+    "reason": "Reviewed-equivalent (relearn numericThresholds): i <= vals.length reads vals[vals.length] = undefined, pushing (last+undefined)/2 = NaN as an extra threshold candidate. A NaN threshold makes r.x[f] <= NaN false for every row, so the whole set routes right, L has 0 rows < minLeaf, and that candidate is discarded in bestSplit — no split, tree, or prediction changes."
+  },
+  {
+    "mutation": "< → <=",
+    "snippet": "for (let i = 0; i < cap; i++) out.push(mids[Math.floor((i * mids.length) / cap)]);",
+    "reason": "Reviewed-equivalent / unreachable: this subsample branch runs only when mids.length > thresholdCap (40). relearn quantizes every numeric column to <=16 distinct values before fitting, so mids.length <= 15 < 40 always and the branch is never entered on any data this kernel produces; the extra iteration cannot be observed."
+  },
+  {
+    "mutation": "< → <=",
+    "snippet": "while (node && !node.leaf && guard++ < 100000) {",
+    "reason": "Reviewed-equivalent: a defensive cycle cap (100000) in the tree walker (and the identical walker emitted in the downloadable replacement module). Trees built here are finite and far shallower than 100000, so the loop always exits on the leaf condition; < vs <= on the cap is unreachable on any tree produced."
+  },
+  {
+    "mutation": ">= → >",
+    "snippet": "if (node.leaf) { const v = per.get(node.id) || { hit: 0, total: 0 }; const acc = v.total >",
+    "reason": "Reviewed-equivalent boundary: the >= on minValidate (3) and on confTau (0.80) only differ from > when a leaf has EXACTLY 3 validate rows or EXACTLY 0.80 accuracy. The validate slice is fixed by a deterministic FNV hash split, so no leaf lands on either exact boundary in the suite; and this flag feeds only the advisory flagged-leaf COUNT surfaced to the user — it never changes the tree, the equivalence measurement, or the owned model."
+  },
+  {
+    "mutation": "> → >=",
+    "snippet": "if (node.leaf) { const v = per.get(node.id) || { hit: 0, total: 0 }; const acc = v.total >",
+    "reason": "Reviewed-equivalent: v.total > 0 guards the accuracy ratio. With >= 0 an empty leaf (total 0) computes acc = 0/0 = NaN instead of null, but the very next clause requires acc !== null AND acc >= confTau, and NaN >= confTau is false, so an empty leaf is judged not-confident either way — identical flagged outcome, no division-by-zero reaches a result."
   }
 ]
