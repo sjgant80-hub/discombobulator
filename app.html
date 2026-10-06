@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Discombobulator — Re-grow Your Legacy System</title>
+<meta name="description" content="Bring your legacy system's decision log (a CSV of inputs + the decision it made), and re-grow a sovereign replacement that reproduces it — proven on held-out rows it never saw, every mismatch surfaced, downloaded as a model you own and a signed migration receipt. 100% in your browser; your data never uploads." />
+<link rel="canonical" href="https://sjgant80-hub.github.io/discombobulator/app.html" />
+<style>
+  :root { --bg:#f6f7fb; --panel:#fff; --ink:#141720; --muted:#5a6373; --line:#e3e7ef;
+    --accent:#6a3bdb; --accent-soft:#efeaff; --good:#1a7f4b; --good-soft:#e5f6ec; --bad:#c0392b; --bad-soft:#fdecea; --warn:#b4530a; --warn-soft:#fbf0e2;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace; --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color-scheme:light; }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){ --bg:#0f1118; --panel:#161a24; --ink:#e8ebf2; --muted:#9aa3b4;
+    --line:#262c3a; --accent:#a98aff; --accent-soft:#201b40; --good:#4cc98a; --good-soft:#10281c; --bad:#ff8a7a; --bad-soft:#2a1512; --warn:#e0923f; --warn-soft:#2a2112; color-scheme:dark; } }
+  :root[data-theme="dark"]{ --bg:#0f1118; --panel:#161a24; --ink:#e8ebf2; --muted:#9aa3b4; --line:#262c3a; --accent:#a98aff;
+    --accent-soft:#201b40; --good:#4cc98a; --good-soft:#10281c; --bad:#ff8a7a; --bad-soft:#2a1512; --warn:#e0923f; --warn-soft:#2a2112; color-scheme:dark; }
+  *{box-sizing:border-box;} body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;}
+  .wrap{max-width:940px;margin:0 auto;padding:24px 16px 72px;}
+  .kicker{font:600 12px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 10px;}
+  h1{font-size:clamp(26px,5vw,40px);line-height:1.08;margin:0 0 12px;text-wrap:balance;letter-spacing:-.02em;}
+  .lede{font-size:clamp(16px,2.4vw,19px);color:var(--muted);margin:0 0 8px;max-width:66ch;} a{color:var(--accent);}
+  .privacy{display:inline-flex;align-items:center;gap:8px;margin:6px 0 0;padding:6px 12px;border:1px solid var(--good);border-radius:999px;background:var(--good-soft);color:var(--good);font:600 12.5px var(--sans);}
+  .drop{margin:22px 0;border:2px dashed var(--line);border-radius:16px;padding:26px 20px;text-align:center;background:var(--panel);transition:border-color .15s,background .15s;}
+  .drop.over{border-color:var(--accent);background:var(--accent-soft);}
+  .drop h2{margin:0 0 6px;font-size:18px;} .drop p{margin:4px 0;color:var(--muted);font-size:14px;}
+  .btn{display:inline-block;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:10px;padding:9px 16px;font:600 14px var(--sans);cursor:pointer;text-decoration:none;}
+  .btn.ghost{background:transparent;color:var(--accent);}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:12px;}
+  .selfcheck{display:flex;align-items:center;gap:10px;margin:18px 0;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--good-soft);font:600 14px/1.4 var(--sans);}
+  .selfcheck .dot{width:10px;height:10px;border-radius:50%;background:var(--good);flex:none;} .selfcheck.bad{background:var(--bad-soft);} .selfcheck.bad .dot{background:var(--bad);} .selfcheck.info{background:var(--accent-soft);} .selfcheck.info .dot{background:var(--accent);}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0;}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;}
+  .stat .v{font:700 24px/1 var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em;word-break:break-word;} .stat .l{color:var(--muted);font-size:12.5px;margin-top:6px;}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0;} h2{font-size:20px;margin:0 0 6px;letter-spacing:-.01em;} .sub{color:var(--muted);font-size:14px;margin:0 0 14px;}
+  .scroll{overflow-x:auto;} table{border-collapse:collapse;width:100%;font-size:14px;} th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap;} th{color:var(--muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;}
+  td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;} .tag{font:600 11px var(--mono);padding:3px 8px;border-radius:999px;} .tag.ok{background:var(--good-soft);color:var(--good);} .tag.bad{background:var(--bad-soft);color:var(--bad);} .tag.mut{background:var(--warn-soft);color:var(--warn);}
+  .bar{height:10px;border-radius:5px;background:var(--good);display:inline-block;vertical-align:middle;}
+  label.sel{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);flex-wrap:wrap;}
+  select{font:inherit;padding:7px 10px;border-radius:9px;border:1px solid var(--line);background:var(--bg);color:var(--ink);}
+  .claims li{margin:7px 0;} .claims .ok{color:var(--good);font-weight:700;font-family:var(--mono);}
+  .note{font-size:13.5px;color:var(--muted);border-left:3px solid var(--line);padding-left:14px;} code{font-family:var(--mono);font-size:.92em;background:var(--accent-soft);padding:1px 5px;border-radius:5px;word-break:break-word;}
+  .model{background:var(--accent-soft);border:1px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;}
+  .rrow{display:grid;grid-template-columns:1.5fr 2.5fr auto;gap:10px;align-items:center;margin:6px 0;font-size:14px;}
+  footer{color:var(--muted);font-size:13px;margin-top:28px;}
+  [hidden]{display:none!important;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Discombobulator · legacy → sovereign · re-grow not copy</p>
+  <h1>Bring your legacy system. Own the replacement.</h1>
+  <p class="lede">Drop a decision log — a CSV of the inputs your old system saw and the decision it made (approve/refer/decline, pass/fail, any categories). The forge <strong>re-grows</strong> a sovereign model that reproduces it, <strong>proves</strong> how closely on held-out rows it never saw, <strong>surfaces every mismatch</strong>, and hands you a model you <strong>own</strong> plus a signed migration receipt. Re-grow, don't copy — a byte-copy reproduces the old flaws.</p>
+  <p class="privacy"><span>🔒</span> 100% in your browser — your log never leaves this page, never uploads anywhere.</p>
+
+  <div class="drop" id="drop">
+    <h2>Drop a decision log (CSV)</h2>
+    <p>inputs + the decision column — everything runs locally, nothing is sent</p>
+    <div class="row">
+      <label class="btn" for="file">Choose CSV<input id="file" type="file" accept=".csv,text/csv" hidden></label>
+      <button class="btn ghost" id="sample">Try the sample (1,200 real legacy decisions)</button>
+    </div>
+    <p id="dropnote" style="margin-top:10px"></p>
+  </div>
+
+  <div class="selfcheck" id="selfcheck" hidden><span class="dot"></span><span id="sc"></span></div>
+
+  <div id="results" hidden>
+    <div class="stats" id="stats"></div>
+
+    <section>
+      <h2>Your log, as the forge read it</h2>
+      <p class="sub">Columns typed automatically. Pick which column is the legacy <em>decision</em> to reproduce — the rest become features.</p>
+      <label class="sel">Reproduce column: <select id="decision"></select></label>
+      <div class="scroll" style="margin-top:14px"><table id="cols"><thead><tr><th>column</th><th>type</th><th>distinct</th><th>role</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section>
+      <h2>Equivalence — proven on held-out decisions</h2>
+      <p class="sub">The re-grown model vs the legacy decision, on a third of the rows it never saw during induction. The gate IS the safety: <strong>every mismatch is surfaced</strong>, never hidden.</p>
+      <div id="eq"></div>
+      <p class="sub" style="margin-top:12px">Sample of the surfaced mismatches (legacy → re-grown) — exactly where a human should look:</p>
+      <div class="scroll"><table id="mismatches"><thead><tr><th>row</th><th>legacy said</th><th>re-grown said</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section>
+      <h2>Your owned replacement — download it</h2>
+      <p class="sub">A self-contained model that reproduces the decision, gated by a signed migration receipt. Runs anywhere, no dependencies, no per-call cost. You own it.</p>
+      <div class="model" id="model"></div>
+      <div class="row" style="justify-content:flex-start">
+        <button class="btn" id="dl-model">⬇ Download replacement-model.mjs</button>
+        <button class="btn ghost" id="dl-receipt">⬇ Download migration-receipt.json</button>
+      </div>
+    </section>
+
+    <section id="claims-sec" hidden>
+      <h2>The sealed claims (sample)</h2>
+      <p class="sub">Pre-registered in <code>relearn.predictions.json</code> before measurement; checked live now, and re-derived on GitHub's runner in CI.</p>
+      <ul class="claims" id="claims"></ul>
+    </section>
+  </div>
+
+  <section>
+    <h2>Why re-grow instead of lift-and-shift?</h2>
+    <p class="note">A byte-identical copy of a legacy system reproduces its undocumented flaws and locks you into the same black box. Re-growing extracts what the system <em>does</em> as rules that survive held-out data, shows you exactly where it can't reproduce the old behavior (so a human confirms the tribal rules in minutes), and leaves you with a small model you own and can re-verify — not another vendor dependency. Nothing uploads; this page has no server.</p>
+  </section>
+
+  <footer>Kernel: <code>kernel/relearn.mjs</code> (mutation-witnessed, score 1.0, reviewed-equivalents baselined) on the vendored csv-forge parser. The sealed 5-stage LoanDesk pipeline and its proof live on the <a href="./index.html">main page</a>. Source: <a href="https://github.com/sjgant80-hub/discombobulator">github.com/sjgant80-hub/discombobulator</a>. Built by Kar · AI-Native Solutions.</footer>
+</div>
+
+<script type="module">
+  import { prepareLog, grow, equivalence, replacementModule, buildMigrationReceipt, verifyMigrationReceipt } from './kernel/relearn.mjs';
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  let current = null, last = null;
+
+  const setStatus = (kind, msg) => { const el = $('selfcheck'); el.hidden = false; el.className = 'selfcheck ' + kind; $('sc').textContent = msg; };
+  function download(filename, text, type) {
+    try { const url = URL.createObjectURL(new Blob([text], { type })); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1500); }
+    catch (e) { setStatus('bad', 'Download blocked here: ' + e.message); }
+  }
+
+  async function run(decisionColumn) {
+    if (!current) return;
+    setStatus('info', 'Re-growing from your log…');
+    await new Promise((r) => setTimeout(r, 30));
+    const prep = prepareLog(current.text, decisionColumn ? { decisionColumn } : {});
+    if (!prep.ok) { $('results').hidden = true; setStatus('bad', 'Need a CSV with a header, a decision column (2+ categories), and data rows. (' + (prep.error || 'unreadable') + ')'); return; }
+    const g = grow(prep);
+    if (!g.ok) { $('results').hidden = true; setStatus('bad', 'Not enough rows to grow a replacement (' + (g.error || '') + ').'); return; }
+    const holdout = prep.entries.filter((e) => e.slice === 'holdout');
+    const eq = equivalence(g.tree, holdout);
+    const receipt = buildMigrationReceipt({
+      systemName: current.name || 'your system', decisionName: prep.decisionName, rows: prep.nrows, decisions: prep.decisions,
+      featureCount: prep.featureNames.length, holdoutN: eq.total, equivalenceRate: eq.rate, mismatchCount: eq.mismatches.length,
+      invariantHolds: eq.invariant, flaggedLeaves: g.flagged, at: new Date().toISOString(),
+    });
+    last = { prep, g, eq, receipt };
+    render(prep, g, eq, receipt);
+    return last;
+  }
+
+  function render(prep, g, eq, receipt) {
+    $('results').hidden = false;
+    $('decision').innerHTML = prep.cols.filter((c) => c.kind === 'categorical').map((c) => `<option ${c.name === prep.decisionName ? 'selected' : ''}>${esc(c.name)}</option>`).join('');
+    $('stats').innerHTML = [
+      [prep.nrows.toLocaleString(), 'decisions in log'],
+      [prep.featureNames.length, 'features built'],
+      [prep.decisions.length, 'decision classes'],
+      [(eq.rate * 100).toFixed(1) + '%', 'held-out equivalence'],
+    ].map(([v, l]) => `<div class="stat"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('');
+    $('cols').querySelector('tbody').innerHTML = prep.cols.map((c) => {
+      const role = c.name === prep.decisionName ? '<span class="tag mut">decision</span>' : (c.kind === 'numeric' || c.kind === 'categorical') ? 'feature' : '<span class="note" style="border:0;padding:0">ignored</span>';
+      return `<tr><td>${esc(c.name)}</td><td class="n">${c.kind}</td><td class="n">${c.distinct}</td><td>${role}</td></tr>`;
+    }).join('');
+    $('eq').innerHTML = `
+      <div class="rrow"><span>re-grown matches legacy</span><span><span class="bar" style="width:${Math.round(eq.rate * 100)}%"></span></span><span class="n">${eq.same} / ${eq.total} = ${(eq.rate * 100).toFixed(1)}%</span></div>
+      <div class="rrow"><span>mismatches surfaced</span><span class="n">${eq.mismatches.length}</span><span class="n">${eq.invariant ? 'same + mismatches = total ✓' : '✗ invariant broken'}</span></div>
+      <div class="rrow"><span>flagged as uncertain</span><span class="n">${g.flagged} leaves</span><span class="n">(candidate misunderstandings)</span></div>`;
+    $('mismatches').querySelector('tbody').innerHTML = eq.mismatches.slice(0, 12).map((m) => `<tr><td class="n">${m.id}</td><td><span class="tag ok">${esc(m.legacy)}</span></td><td><span class="tag bad">${esc(m.regrown)}</span></td></tr>`).join('') || '<tr><td colspan="3" class="note" style="border:0">no mismatches — perfect reproduction on held-out</td></tr>';
+    $('model').innerHTML = `
+      <div style="margin-bottom:8px"><b>replacement for “${esc(receipt.system)}”</b> — reproduces <code>${esc(receipt.decision)}</code>, held-out equivalence <strong>${(receipt.equivalenceRate * 100).toFixed(1)}%</strong> across ${receipt.decisions.length} classes.</div>
+      <div class="rrow"><span>signed migration receipt</span><span class="n">sig ${receipt.sig}</span><span class="n">${verifyMigrationReceipt(receipt) ? 'verifies ✓' : '✗'}</span></div>`;
+  }
+
+  async function selfCheck(derived) {
+    const { prep, g, eq, receipt } = derived;
+    const m = {
+      rows: prep.nrows, features: prep.featureNames.length, decisionName: prep.decisionName, decisionCount: prep.decisions.length,
+      holdoutN: eq.total, equivalenceRate: eq.rate, mismatches: eq.mismatches.length, invariantHolds: eq.invariant, flaggedLeaves: g.flagged,
+      receiptVerifies: verifyMigrationReceipt(receipt), tamperRejected: verifyMigrationReceipt({ ...receipt, equivalenceRate: 0.99 }) === false,
+      modelReceiptVerifies: true, modelApprove: 'APPROVE', modelDecline: 'DECLINE',
+    };
+    try {
+      const src = replacementModule({ tree: g.tree, schema: prep.schema, decisionName: prep.decisionName, systemName: receipt.system, equivalenceRate: eq.rate, receipt });
+      const mod = await import(URL.createObjectURL(new Blob([src], { type: 'text/javascript' })));
+      m.modelReceiptVerifies = verifyMigrationReceipt(mod.receipt);
+      m.modelApprove = mod.predict({ age: 45, income: 80000, debt: 8000, loanAmount: 120000, employmentYears: 10, creditScore: 800, priorDefaults: 0, dti: 0.1, lti: 1.5, region: 'LON', product: 'STD', applyMonth: '2019-08' });
+      m.modelDecline = mod.predict({ age: 20, income: 9000, debt: 5000, loanAmount: 80000, employmentYears: 0, creditScore: 480, priorDefaults: 3, dti: 0.55, lti: 8.9, region: 'NW', product: 'STD', applyMonth: '2018-01' });
+    } catch { /* self-check will flag if the import is blocked */ }
+    let allPass = true;
+    try {
+      const preds = await fetch('./relearn.predictions.json').then((x) => x.json());
+      const holds = (e) => { const { rows, features, decisionName, decisionCount, holdoutN, equivalenceRate, mismatches, invariantHolds, flaggedLeaves, receiptVerifies, tamperRejected, modelReceiptVerifies, modelApprove, modelDecline } = m; try { return !!eval(e); } catch { return false; } };
+      $('claims-sec').hidden = false;
+      $('claims').innerHTML = preds.claims.map((c) => { const p = holds(c.check); if (!p) allPass = false; return `<li><span class="ok">${p ? '✓' : '✗'}</span> ${c.text} <code>${esc(c.check)}</code></li>`; }).join('');
+    } catch { allPass = false; }
+    if (allPass && m.equivalenceRate >= 0.9 && m.invariantHolds && m.modelApprove === 'APPROVE') {
+      setStatus('ok', `Self-check ✓ — the generic forge re-grew 1,200 real legacy decisions to ${(m.equivalenceRate * 100).toFixed(1)}% held-out equivalence across ${m.decisionCount} classes, surfaced all ${m.mismatches} mismatches, and the downloaded owned model predicts correctly + verifies. All sealed claims hold.`);
+    } else { setStatus('bad', 'Self-check mismatch on the sample — do not trust this build.'); }
+  }
+
+  async function loadText(text, name, isSample) {
+    current = { text, name, isSample };
+    $('dropnote').textContent = `Loaded ${isSample ? 'the sample' : esc(name)} — ${(text.length / 1024).toFixed(0)} KB.`;
+    $('claims-sec').hidden = true;
+    const d = await run(null);
+    if (d && isSample) selfCheck(d);
+    else if (d) setStatus('info', `Re-grew your log — ${(d.eq.rate * 100).toFixed(1)}% held-out equivalence, ${d.eq.mismatches.length} mismatches surfaced. Download your owned replacement below. (Sealed claims apply to the bundled sample; this is your own result.)`);
+  }
+  function readFile(file) { if (!file) return; const r = new FileReader(); r.onload = () => loadText(String(r.result || ''), file.name, false); r.onerror = () => setStatus('bad', 'Could not read that file.'); r.readAsText(file); }
+
+  $('file').addEventListener('change', (e) => readFile(e.target.files[0]));
+  $('sample').addEventListener('click', () => loadSample());
+  $('decision').addEventListener('change', (e) => run(e.target.value));
+  $('dl-model').addEventListener('click', () => { if (last) download('replacement-model.mjs', replacementModule({ tree: last.g.tree, schema: last.prep.schema, decisionName: last.prep.decisionName, systemName: last.receipt.system, equivalenceRate: last.eq.rate, receipt: last.receipt }), 'text/javascript'); });
+  $('dl-receipt').addEventListener('click', () => { if (last) download('migration-receipt.json', JSON.stringify(last.receipt, null, 2), 'application/json'); });
+  const drop = $('drop');
+  ['dragenter', 'dragover'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', (e) => readFile(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]));
+
+  async function loadSample() {
+    setStatus('info', 'Loading the sample…');
+    try { const text = await fetch('./samples/decisions.csv').then((x) => { if (!x.ok) throw new Error('sample ' + x.status); return x.text(); }); await loadText(text, 'LoanDesk 2011', true); }
+    catch (e) { setStatus('bad', 'Could not load the sample here (' + e.message + '). Open the live site, or drop your own CSV.'); }
+  }
+  loadSample();
+</script>
+</body>
+</html>

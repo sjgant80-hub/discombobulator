@@ -7,7 +7,8 @@
     "test": "node --test",
     "pipeline": "node run.mjs",
     "seal": "node seal.mjs",
-    "gate": "node witness.mjs mutate kernel/understand.mjs && node witness.mjs mutate kernel/regrow.mjs && node witness.mjs mutate kernel/verify.mjs && node witness.mjs mutate kernel/migrate.mjs && node witness.mjs mutate kernel/features.mjs && node witness.mjs mutate kernel/confirm.mjs"
+    "gate": "node witness.mjs mutate kernel/understand.mjs && node witness.mjs mutate kernel/regrow.mjs && node witness.mjs mutate kernel/verify.mjs && node witness.mjs mutate kernel/migrate.mjs && node witness.mjs mutate kernel/features.mjs && node witness.mjs mutate kernel/confirm.mjs && node witness.mjs mutate kernel/relearn.mjs",
+    "verify-product": "node relearn-verify.mjs"
   },
   "license": "MIT"
 }

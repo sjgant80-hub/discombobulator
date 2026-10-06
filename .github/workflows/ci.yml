@@ -10,15 +10,19 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: '20' }
+      - name: Data integrity — the bring-your-own-log sample must be the exact frozen bytes
+        run: echo "1653ae2e3f965bc339d3d1270fb89690b47c63c153ae8d6d89c4805640a58c99  samples/decisions.csv" | sha256sum -c -
       - name: Tests (behaviour + totality + invariants)
         run: node --test
       - name: Witness mutation gate (every kernel must be CLEAN)
         run: |
           set -e
-          for k in features understand regrow verify migrate ingest confirm; do
+          for k in features understand regrow verify migrate ingest confirm relearn; do
             echo "=== witness: kernel/$k.mjs ==="
             node witness.mjs mutate kernel/$k.mjs --test node --test
           done
+      - name: Product re-derivation — drive the whole bring-your-own-log flow on the sample
+        run: node relearn-verify.mjs
       - name: Seal — re-derive the measurement from the sealed inputs
         run: |
           if [ -f measure.json ]; then
